@@ -1,45 +1,25 @@
 
+<div align="justify">
+
+
 # Sarcasm Detection in Social Media Text
 
 <p align="center">
---- Mostly a pedagogical project to learn about LLMs, nothing new being explored! --- <br>
---- Work in progress, pardon the mess --- <br>
---- Working on fixing inacurracies in background information ---
+———Work in progress———<br>
+———Mostly a pedagogical project to learn about LLMs———<br>
+———Working on fixing inacurracies in background information———
 </p>
 
-2025 June — Present
 
 Johnson Liu\
-<sub><small>
-GitHub: [@johnson-liu-code](https://github.com/johnson-liu-code)\
-</small></sub>
+GitHub: [@johnson-liu-code](https://github.com/johnson-liu-code)
 
-## Quick‑start & Code Overview
 
-### Purpose
-Classify Reddit comments as *sarcastic / not sarcastic* using word‑embeddings + neural nets.
+### Project Description
+This pedagogical project aims to learn about natural language processing techniques and neural networks by applying them to classify Reddit comments as either sarcastic or not sarcastic.
+The project involves training word embeddings using the GloVe model (or using pre-trained embeddings from libraries like Hugging Face's Transformers) and training neural networks (feedforward, convolutional, and recurrent) to classify comments based on their embeddings.
 
-### Repository Layout
-| Path | Notes |
-|------|-------|
-| `landing.py` / `main.py` | CLI entry points (data prep, train, evaluate, predict). |
-| `functions/helper_functions/` | Tokenisation, cleaning, TF‑IDF, train/test split. |
-| `functions/machine_learning/LogBilinearModel.py` | GloVe embedding trainer. |
-| `functions/machine_learning/feedforward_neural_network.py` | FNN classifier. |
-<!-- | `data/` | Training and generated data. | -->
 
-### How to Run
-```bash
---- to be added ---
-```
-
-### Issues
-* Mixed tabs / spaces → run *black / ruff*.  
-* Hard‑coded absolute paths (`C:\Users\…`) – switch to `Path(__file__).parent / 'data'`.  
-* Recursive `print` debugging – replace with `logging`.  
-* No evaluation scripts for CNN / RNN yet.
-
----
 
 ## __Contents__
 
@@ -91,7 +71,7 @@ Classify Reddit comments as *sarcastic / not sarcastic* using word‑embeddings 
 
 ## __Project Overview__
 
-This project aims to experiment with applying natural language processing techniques to classify comments found in informal, conversational, or otherwise casual text found through social media as either sarcastic or not.
+This project aims to experiment with applying natural language processing techniques to classify comments found in informal, conversational, or otherwise casual text found through social media as either sarcastic or not sarcastic.
 The current scope of this project involves training neural network models on prelabeled comments from a dataset retrieved from Kaggle and using the trained models to predict the presence of sarcastic intent in Reddit comments.
 A possible future extension is applying sarcasm detection to broader sentiment analysis to general sentiment analysis in social media posts.
 Another possible avenue to explore is sentiment analysis through multimodal input (including images alongside text).
@@ -198,24 +178,121 @@ The mean acts as a point of central tendency for the word vectors associated wit
 
 ##### <ins>... something something ...</ins>
 
-### __Workflow__
+## Workflow
 
-##### <ins>Collect comments classified as sarcastic/not sarcastic</ins>
+### Collect Comments Classified as Sarcastic/Not Sarcastic
 
-1. ... text here ...
+The dataset for this project was derived from the *Sarcasm on Reddit* dataset available on Kaggle, which compiles Reddit comments labeled as sarcastic or non-sarcastic by crowd-sourced annotation.
+Datasets of this type are widely used in computational linguistics research to benchmark sarcasm detection tasks ([Kaggle Sarcasm Dataset](https://www.kaggle.com/datasets/danofer/sarcasm)).
 
-2. ... text here ...
+The collected dataset is split into three partitions, consistent with standard practices in machine learning:
 
-<!-- #### <ins>word2vec model</ins>
+- **Training set**<br>
+Used to fit the model to the labeled examples.
 
-1. ... text here ...
+- **Validation set**<br>
+Used to tune hyperparameters (e.g., learning rate, hidden layer size, dropout rates).
 
-2. ... text here ... -->
+- **Test set**<br>
+Reserved for final unbiased evaluation on unseen data.
 
-##### <ins>GloVe model</ins>
-General workflow when applying the GloVe model ...
+This procedure follows the canonical machine learning paradigm of dataset partitioning, as outlined in [Wikipedia: Training, validation, and test sets](https://en.wikipedia.org/wiki/Training,_validation,_and_test_sets).
+
+---
+
+### GloVe Model
+
+The **Global Vectors for Word Representation (GloVe)** algorithm is used to create word embeddings that capture semantic relationships between words. The general workflow of GloVe ([Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf)) is as follows:
+
+#### Preprocess Raw Data
+
+1. **Stopword removal**<br>
+Stopwords are common function words (e.g., “the”, “is”) that occur with high frequency but provide little semantic value when distinguishing sarcasm from non-sarcasm. They are typically removed to reduce noise ([Wikipedia: Stop words](https://en.wikipedia.org/wiki/Stop_words)).
+
+2. **Punctuation removal**<br>
+While punctuation (e.g., “Yeah, right!”) can signal sarcasm, in this simplified project it is excluded. Future extensions could explicitly model punctuation and emoji as sarcasm markers ([Davidov et al., 2010](https://aclanthology.org/W10-2914/)).
+
+3. **Miscellaneous symbols**<br>
+Emoticons, foreign-language words, and mathematical notation are treated as noise and removed.
+
+4. **Vocabulary construction**<br>
+Define the vocabulary as the set of unique tokens appearing in the dataset. This vocabulary is central to building co-occurrence statistics.  
+
+#### Compute the Co-occurrence Matrix
+
+- The **co-occurrence matrix** counts how often word \( w_i \) appears in the context of another word \( w_j \). The context is defined by a sliding window (e.g., ±5 tokens).  
+- Unlike earlier probabilistic methods, GloVe directly uses **co-occurrence frequencies** rather than probabilities. This distinction is crucial, as the algorithm is based on factorizing a weighted least-squares objective that relates co-occurrence frequencies to embedding geometry ([Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf)).  
+
+#### Train Word Vectors
+
+- Each token is represented as a vector of fixed dimension (e.g., 50–300). Larger dimensionality can capture richer semantic nuances but increases computation cost.  
+- Training minimizes a weighted least-squares loss designed to enforce that dot products of word vectors approximate the logarithm of co-occurrence counts.  
+- Evaluation of learned embeddings is performed using:  
+  - **Word similarity tests**: Measuring pairwise cosine similarity between embeddings to check semantic closeness.  
+  - **Word analogy tests**: Using vector arithmetic (e.g., “king – man + woman ≈ queen”) to assess how well embeddings capture linear semantic regularities ([Mikolov et al., 2013](https://arxiv.org/abs/1301.3781)).  
+
+---
+
+### Train the Neural Networks
+
+Once embeddings are available, they serve as inputs to classification models tasked with distinguishing sarcastic from non-sarcastic comments. Three architectures are explored: **Feedforward Neural Networks (FNNs)**, **Convolutional Neural Networks (CNNs)**, and **Recurrent Neural Networks (RNNs)**.  
+
+### Feedforward Neural Network (FNN)
+
+1. **Input representation**: Since comments are variable length, each must be transformed into a fixed-size vector. Strategies include:  
+   - **Averaging word vectors (Fréchet mean)**: Compute the component-wise mean of all word embeddings in a comment. This provides a simple “bag of embeddings” representation.  
+   - **TF-IDF weighted averaging**: Scale embeddings by their term frequency–inverse document frequency scores so that rare but informative words have more influence ([Wikipedia: TF–IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)).  
+
+2. **Network architecture**:  
+   - Input layer corresponding to the embedding dimension.  
+   - One or more hidden layers with nonlinear activation (ReLU or tanh).  
+   - Output layer with a sigmoid activation to predict probability of sarcasm.  
+
+3. **Loss function**: Binary Cross-Entropy (BCE), defined as:  
+   \[
+   BCE(p,y) = -(y \cdot \log(p) + (1-y) \cdot \log(1-p))
+   \]  
+
+4. **Regularization techniques**:  
+   - **Batch Normalization** to stabilize training.  
+   - **Dropout** and **weight decay** to prevent overfitting ([Srivastava et al., 2014](https://jmlr.org/papers/v15/srivastava14a.html)).  
+
+5. **Troubleshooting and diagnostics**:  
+   - **Precision/recall metrics** highlight imbalances between sarcastic and non-sarcastic predictions.  
+   - **Confidence histograms** reveal uncertainty when probabilities cluster near 0.5.  
+   - **PCA analysis** of learned feature space can show whether embeddings form separable clusters by class.  
+
+### Convolutional Neural Network (CNN)
+
+- CNNs apply convolutional filters over sequences of embeddings to extract local n-gram features. For sarcasm, this can capture short sarcastic cues like “yeah right” or “as if.”  
+- CNNs have proven effective in sentence classification tasks ([Kim, 2014](https://arxiv.org/abs/1408.5882)).  
+
+### Recurrent Neural Network (RNN)
+
+- RNNs (and their variants such as LSTMs and GRUs) process sequences word by word, maintaining memory of prior context. This is particularly useful in sarcasm, where long-range dependencies (setup–punchline structures) exist.  
+- RNNs remain a standard choice for modeling sequential dependencies ([Wikipedia: Recurrent neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network)).  
+
+
+
+
+<!-- ##### <ins>Collect comments classified as sarcastic/not sarcastic</ins> -->
+
+<!-- 1. Collect a dataset of comments that have been labeled as either sarcastic or not sarcastic.
+    1. The dataset used in this project was taken from the *Sarcasm on Reddit* notebook from Kaggle.com ( see [2.1 Data](#data) in the References and Helpful Resources section ).
+
+1. Split the dataset into training, validation, and test sets.
+    1. The training set is used to train the model.
+    1. The validation set is used to tune the model's hyperparameters.
+    1. The test set is used to evaluate the model's performance on unseen data.
+
+1.  -->
+
+<!-- ##### <ins>GloVe model</ins> -->
+
+<!-- General workflow when applying the GloVe model ... -->
+<!-- The general workflow when applying the GloVe model to train word vectors is as follows:
+
 1. Process raw data
-
     1. Remove stopwords, punctuation, and other words and/or characters that are deemed not important to the context of a comment.
 
         1. Stopwords are commonly used words within a language that appear frequently in many contexts. These words are assumed to be not important when discerning between comments that are meant to be sarcastic and comments that are not meant to be sarcastic.
@@ -329,44 +406,16 @@ General workflow when applying the GloVe model ...
 
     1. Convolutional Neural Network (CNN)
 
-    1. Recurrent Neural Network (RNN)
-        1. Binary Cross Entropy
-            BCE(p,y)=−(y⋅log(p)+(1−y)⋅log(1−p))
-
-        1. Batch Normalization
-        1. Regularization
-            1. Dropout
-            1. Weight decay
-        
-        1. Training struggles ...
-            1. Per-Class Precision And Recall (Validation Set)
-                <img src="figures/training_troubleshooting/fnn/per_class_precision_recall.png.png" width="50%" height="50%"/>
-
-            1. Prediction Confidence Histogram
-                <img src="figures/training_troubleshooting/fnn/prediction_confidence_histogram.png.png" width="50%" height="50%"/>
+    1. Recurrent Neural Network (RNN) -->
 
 
-            1. Your model has learned some separation, but not enough to make confident predictions.
-
-            Many predictions fall near the decision threshold (0.5), which is where models are most unsure.
-
-
-            1. PCA analysis
-            <img src="figures/training_troubleshooting/fnn/PCA_projection_of_real_feature_space.png.png" width="50%" height="50%"/>
-
-            1. 
-
-    1. Convolutional Neural Network (CNN)
-
-    1. Recurrent Neural Network (RNN)
-
-##### <ins>Collect comments and classify them</ins>
+<!-- ##### <ins>Collect comments and classify them</ins>
 
 1. ... text here ...
 
-1. ... text here ...
+1. ... text here ... -->
 
-## __Resources and Helpful References__
+## __References and Helpful Resources__
 
 ### __Data__
 1. [Sarcasm on Reddit <br> – Kaggle dataset with Reddit posts classified as either sarcastic or not sarcastic ( _Kaggle_ website ).](https://www.kaggle.com/datasets/danofer/sarcasm/data?select=train-balanced-sarcasm.csv)
@@ -483,3 +532,6 @@ General workflow when applying the GloVe model ...
     1. Develop an app that can be used in a web browser that allows the user to directly take a comment and its associated data straight from the Reddit website (or from a screenshot).
     1. Develop the app further to display in real time the predicted tone of all of the comments seen in the current browser window.
     1. Extend project to multimodal classification where multiple input modalities (images, video, audio, etc.) are used together for prediction/classification.
+
+
+    </div>
