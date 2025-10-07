@@ -5,76 +5,66 @@
 # Sarcasm Detection in Social Media Text
 
 <p align="center">
-———Work in progress———<br>
-———Mostly a pedagogical project to learn about LLMs———<br>
-———Working on fixing inacurracies in background information———
+———Work in progress———
 </p>
 
+This project investigates sarcasm detection in social media text, with Reddit comments as a primary data source.
+Sarcasm presents a distinctive challenge for natural language processing (NLP), since it often relies on contextual cues, irony, and pragmatic inference.
+The approach combines word vector representations (trained locally or using pre-trained embeddings from libraries like Hugging Face's Transformers) with neural betwork architectures (feedforward, convolutional, and recurrent models) to classify comments as sarcastic or non-sarcastic.
 
 Johnson Liu\
 GitHub: [@johnson-liu-code](https://github.com/johnson-liu-code)
 
 
-### Project Description
-This pedagogical project aims to learn about natural language processing techniques and neural networks by applying them to classify Reddit comments as either sarcastic or not sarcastic.
-The project involves training word embeddings using the GloVe model (or using pre-trained embeddings from libraries like Hugging Face's Transformers) and training neural networks (feedforward, convolutional, and recurrent) to classify comments based on their embeddings.
+
+## Contents
+
+1. [Project Overview](#project-overview)
+
+2. [Background](#background)\
+    2.1. [Natural Language Processing (NLP)](#natural-language-processing---nlp)\
+&nbsp;&nbsp;&nbsp;2.1.1 [Word Embedding](#word-embedding)\
+&nbsp;&nbsp;&nbsp;2.1.2 [Word2Vec](#word2vec)\
+&nbsp;&nbsp;&nbsp;2.1.3 [GloVe](#glove)\
+    2.2. [Data Used](#data-used)\
+    2.3. [Mathematical Foundations](#mathematical-foundations)
+
+3. [Workflow](#workflow)\
+    3.1. [Data Preprocessing]()\
+    3.2. [Word Vector Training]()\
+    3.3. [Neural Network Training]()\
+&nbsp;&nbsp;&nbsp;3.3.1 [Feedforward Neural Network]()\
+&nbsp;&nbsp;&nbsp;3.3.2 [Convolutional Neural Network]()\
+&nbsp;&nbsp;&nbsp;3.3.3 [Recurrent Neural Network]()
+
+4. [Resources and Helpful References](#resources-and-helpful-references)\
+    4.1. [Data](#data)\
+    4.2. [Theoretical Foundations](#theoretical-foundations)\
+&nbsp;&nbsp;&nbsp;4.2.1. [Natural Language Processing](#natural-language-processing)\
+&nbsp;&nbsp;&nbsp;4.2.2. [word2vec Model](#word2vec-model)\
+&nbsp;&nbsp;&nbsp;4.2.3. [GloVe Model](#glove-model)\
+    4.3. [Sample Works](#sample-works)\
+    4.4. [Documentation and Tutorials](#documentation-and-tutorials)\
+&nbsp;&nbsp;&nbsp;4.4.1. [Neural Networks](#neural-networks)\
+&nbsp;&nbsp;&nbsp;4.4.2. [Gensim](#gensim)\
+    4.5. [Other Theoretical Backgrounds](#other-theoretical-backgrounds)\
+    4.6. [Mathematical References](#mathematical-references)\
+    4.7. [Graphical Visualization Guides](#graphical-visualization-guides)
 
 
+5. [Future Direction and Possible Improvements](#future-direction-and-possible-improvements)
 
-## __Contents__
-
-1. [Project Overview](#project-overview)\
-    1.1. [Background](#background)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.1. [Natural Language Processing NLP](#natural-language-processing---nlp)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.2. [Word Embedding](#word-embedding)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.3. [Word2Vec](#word2vec)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.4. [GloVe](#glove)\
-    1.2. [Data Used](#data-used)\
-    1.3. [Mathematical Foundations](#mathematical-foundations)\
-    1.4. [Workflow](#workflow)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.1. [Data Preprocessing]()\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.2. [Word Vector Training]()\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.3. [Neural Network Training]()\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.3.1 [Feedforward Neural Network]()\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.3.2 [Convolutional Neural Network]()\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.4.3.3 [Recurrent Neural Network]()
-
----
-
-2. [Resources and Helpful References](#resources-and-helpful-references)\
-    2.1. [Data](#data)\
-    2.2. [Theoretical Foundations](#theoretical-foundations)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1. [Natural Language Processing](#natural-language-processing)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2. [word2vec Model](#word2vec-model)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3. [GloVe Model](#glove-model)\
-    2.3. [Sample Works](#sample-works)\
-    2.4. [Documentation and Tutorials](#documentation-and-tutorials)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4.1. [Neural Networks](#neural-networks)\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4.2. [Gensim](#gensim)\
-    2.5. [Other Theoretical Backgrounds](#other-theoretical-backgrounds)\
-    2.6. [Mathematical References](#mathematical-references)\
-    2.7. [Graphical Visualization Guides](#graphical-visualization-guides)
-
----
-
-
-3. [Implementation](#implementation)
-
----
-
-4. [Future Direction and Possible Improvements](#future-direction-and-possible-improvements)
 
 ---
 
 
 
-
-## __Project Overview__
+## Project Overview
 
 This project aims to experiment with applying natural language processing techniques to classify comments found in informal, conversational, or otherwise casual text found through social media as either sarcastic or not sarcastic.
 The current scope of this project involves training neural network models on prelabeled comments from a dataset retrieved from Kaggle and using the trained models to predict the presence of sarcastic intent in Reddit comments.
 A possible future extension is applying sarcasm detection to broader sentiment analysis to general sentiment analysis in social media posts.
-Another possible avenue to explore is sentiment analysis through multimodal input (including images alongside text).
+Another possible avenue to explore is sentiment analysis through multimodal input ( including images alongside text ).
 
 
 
@@ -95,35 +85,65 @@ Consider the sentences 'this ice cream tastes great' and 'you need to take the g
 
 ## Background
 
-##### <ins>Natural Language Processing - NLP</ins>
 
-Natural Language Processing (NLP) can be used for sentiment analysis, which helps identify whether a piece of text expresses a positive, negative, or neutral emotion. NLP allows us to organize unstructured data, like social media posts, emails, and other forms of natural text, into a form that machines can work with by applying text classification techniques.
+### Natural Language Processing (NLP)
 
-This is usually done by training a classifier on a dataset that has been labeled in advance. For example, some texts might be labeled as sarcastic while others are not. The classifier learns patterns in the language based on these labels and tries to apply what it learns to new, unseen data.
+Natural language processing (NLP) is a subfield of artificial intelligence focused on enabling computers to process and understand human language.
+Sentiment analysis, an important NLP application, involves classifying text by emotional polarity ( positive, negative, or neutral ) or affective tone.
+Sarcasm complicates sentiment analysis, as sarcastic expressions can invert literal sentiment ( e.g. “great job!” could be an insult in the context of a negative situation ).
 
-##### <ins>Word Embedding</ins>
-We represent each word as a continuous vector of real numbers. These vectors are initialized (often randomly) and then trained so that words used in similar contexts end up with similar embeddings. Traditional embeddings assign one vector per word type. Contextual embeddings (e.g., ELMo, BERT) produce different vectors for the same word in different sentences.
+—More on NPL here—
 
-##### <ins>Word2Vec</ins>
-Word2Vec is a model that learns word meanings based on the words that commonly appear around them. For example, the words “*doctor*” and “*nurse*” often show up in similar contexts, so Word2Vec places them close together in vector space. This helps the model understand how words relate to one another. In sarcasm detection, understanding context is key, and Word2Vec helps capture that by noticing patterns in how words are used together.
 
-##### <ins>GloVe</ins>
-Global Vectors for Word Representation (GloVe), is another word embedding model. Unlike Word2Vec, which focuses on small windows of text, GloVe looks at word co-occurrence across an entire dataset. This gives it a more global understanding of word relationships. GloVe can help highlight unusual or ironic word pairings—something that often happens in sarcastic sentences.
 
-Some users on Kaggle have successfully used Word2Vec and GloVe to detect sarcasm in news headlines. Some public Kaggle kernels (e.g., detecting sarcasm in headlines) report accuracies in the low- to mid-80% range. In one project, the users trained their model using headlines from The Onion (a satirical site) and The Huffington Post (a more traditional news source).
+#### Word Embeddings
+ 
+Word embeddings map words ( or tokens ) to real vectors in $n$-dimensional space.
+These embeddings ( ideally ) capture semantic similarity between words by assigning similar words vectors that are close together in vector space.
+These vectors are initialized ( often randomly ) and then trained so that words used in similar contexts end up with similar embeddings.
+Traditional embeddings assign one vector per word type.
+More recent contextual embeddings (e.g., ELMo, BERT) allow the same word to have multiple vectors depending on usage.
+
+
+
+#### Word2Vec
+
+Word2Vec is a model that learns word meanings based on the words that commonly appear around them.
+For example, the words “*doctor*” and “*nurse*” often show up in similar contexts, so Word2Vec places them close together in vector space.
+This helps the model understand how words relate to one another.
+In sarcasm detection, understanding context is key, and Word2Vec helps capture that by noticing patterns in how words are used together.
+
+
+
+#### GloVe
+
+Global Vectors for Word Representation (GloVe), is another word embedding model.
+Unlike Word2Vec, which focuses on small windows of text, GloVe looks at word co-occurrence across an entire dataset.
+This gives it a more global understanding of word relationships.
+GloVe can help highlight unusual or ironic word pairings—something that often happens in sarcastic sentences.
+
+Some users on Kaggle have successfully used Word2Vec and GloVe to detect sarcasm in news headlines.
+Some public Kaggle kernels ( e.g., detecting sarcasm in headlines ) report accuracies in the low- to mid-80% range.
+In one project, the users trained their model using headlines from The Onion ( a satirical site ) and The Huffington Post ( a more traditional news source ).
+
 ---insert link/reference here
 
-We can apply a similar approach in our project using Reddit posts. Instead of news headlines, we’ll train our model on a dataset of labeled Reddit comments, using Word2Vec or GloVe to create embeddings. This will allow our classifier to learn the difference between sincere and sarcastic language based on context—just like in the Kaggle example.
+We can apply a similar approach in our project using Reddit posts.
+Instead of news headlines, we’ll train our model on a dataset of labeled Reddit comments, using Word2Vec or GloVe to create embeddings.
+This will allow our classifier to learn the difference between sincere and sarcastic language based on context, just like in the Kaggle example.
 
 
 
 
-### __Data Used__
+#### Data Used
 
 The data that was used in this project was taken from the *Sarcasm on Reddit* notebook from Kaggle.com ( see [2.1 Data](#data) ).
 
 
-### __Variable Definitions__
+---
+
+
+## Variable Definitions
 
 See reference [2.2.3. GloVe model](#theoretical-foundations) in the Theoretical Foundations section.
 
@@ -159,31 +179,48 @@ $$X_i \ \ = \ \ \sum_{\substack{k = 1, \\ k \neq i}}^{N} X_{ik} \ \ . $$
 
 12. $P$ is the co-occurrence probabilities matrix for every possible pair of words $(w_i, w_j) \in W^2$.
 
-13. $P_{ij}$ is the $i$-th row, $j$-th column entry in $P$ which gives the probability that word $w_j$ appears in the context of word $w_i$. You can also think of $P_{ij}$ as the chance of finding word $w_j$ given that you have word $w_i$. This probability is defined as
+13. $P_{ij}$ is the $i$-th row, $j$-th column entry in $P$ which gives the probability that word $w_j$ appears in the context of word $w_i$.
+$P_{ij}$ can also be interpreted as the chance of finding word $w_j$ given that you have word $w_i$.
+This probability is defined as
 
 $$P_{ij} \ \ = \ \ P(\text{word}_j|\text{word}_i) \ \ \\ $$
 
 $$P_{ij} \ \ = \ \ \frac{X_{ij}}{X_i} \ \ . $$
 
 
+---
 
 
-### __Mathematical Foundations__
+## Mathematical Foundations
 
-##### <ins>... something something ...</ins>
 
-##### <ins>Fréchet Mean</ins>
+#### Fréchet Mean
 Given a set of vectors, the Fréchet mean is a single point that averages over all of the vectors.
 The mean acts as a point of central tendency for the word vectors associated with a specific comment.
 
-##### <ins>... something something ...</ins>
+
+---
+
+
+### Neural Networks
+
+#### Multi-layer Perceptron (MLP)
+
+
+
+#### Backpropagation
+
+
+
+
 
 ## Workflow
 
-### Collect Comments Classified as Sarcastic/Not Sarcastic
+
+#### Collect Comments Classified as Sarcastic or Not Sarcastic
 
 The dataset for this project was derived from the *Sarcasm on Reddit* dataset available on Kaggle, which compiles Reddit comments labeled as sarcastic or non-sarcastic by crowd-sourced annotation.
-Datasets of this type are widely used in computational linguistics research to benchmark sarcasm detection tasks ([Kaggle Sarcasm Dataset](https://www.kaggle.com/datasets/danofer/sarcasm)).
+Datasets of this type are widely used in computational linguistics research to benchmark sarcasm detection tasks ( [Kaggle Sarcasm Dataset](https://www.kaggle.com/datasets/danofer/sarcasm) ).
 
 The collected dataset is split into three partitions, consistent with standard practices in machine learning:
 
@@ -198,81 +235,118 @@ Reserved for final unbiased evaluation on unseen data.
 
 This procedure follows the canonical machine learning paradigm of dataset partitioning, as outlined in [Wikipedia: Training, validation, and test sets](https://en.wikipedia.org/wiki/Training,_validation,_and_test_sets).
 
+
 ---
+
+
 
 ### GloVe Model
 
-The **Global Vectors for Word Representation (GloVe)** algorithm is used to create word embeddings that capture semantic relationships between words. The general workflow of GloVe ([Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf)) is as follows:
+The **Global Vectors for word representation ( GloVe )** algorithm is used to create word embeddings that capture semantic relationships between words.
+The general workflow of GloVe ( [Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf) ) is as follows:
 
-#### Preprocess Raw Data
+
+
+#### Preprocess the Raw Data
 
 1. **Stopword removal**<br>
-Stopwords are common function words (e.g., “the”, “is”) that occur with high frequency but provide little semantic value when distinguishing sarcasm from non-sarcasm. They are typically removed to reduce noise ([Wikipedia: Stop words](https://en.wikipedia.org/wiki/Stop_words)).
+Stopwords are common function words (e.g., “the”, “is”) that occur with high frequency but provide little semantic value when distinguishing sarcasm from non-sarcasm.
+They are typically removed to reduce noise ( [Wikipedia: Stop words](https://en.wikipedia.org/wiki/Stop_words) ).
 
 2. **Punctuation removal**<br>
-While punctuation (e.g., “Yeah, right!”) can signal sarcasm, in this simplified project it is excluded. Future extensions could explicitly model punctuation and emoji as sarcasm markers ([Davidov et al., 2010](https://aclanthology.org/W10-2914/)).
+While punctuation (e.g., “Yeah, right!”) can signal sarcasm, in this simplified project it is excluded.
+Future extensions could explicitly model punctuation and emoji as sarcasm markers ( [Davidov et al., 2010](https://aclanthology.org/W10-2914/) ).
 
 3. **Miscellaneous symbols**<br>
 Emoticons, foreign-language words, and mathematical notation are treated as noise and removed.
 
 4. **Vocabulary construction**<br>
-Define the vocabulary as the set of unique tokens appearing in the dataset. This vocabulary is central to building co-occurrence statistics.  
+Define the vocabulary as the set of unique tokens appearing in the dataset.
+This vocabulary is central to building co-occurrence statistics.
+
+
 
 #### Compute the Co-occurrence Matrix
 
-- The **co-occurrence matrix** counts how often word \( w_i \) appears in the context of another word \( w_j \). The context is defined by a sliding window (e.g., ±5 tokens).  
-- Unlike earlier probabilistic methods, GloVe directly uses **co-occurrence frequencies** rather than probabilities. This distinction is crucial, as the algorithm is based on factorizing a weighted least-squares objective that relates co-occurrence frequencies to embedding geometry ([Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf)).  
+- The **co-occurrence matrix** counts how often word $w_i$ appears in the context of another word $w_j$.
+The context is defined by a sliding window ( e.g., ±5 tokens ).
 
-#### Train Word Vectors
+- Unlike earlier probabilistic methods, GloVe directly uses **co-occurrence frequencies** rather than probabilities.
+This distinction is crucial, as the algorithm is based on factorizing a weighted least-squares objective that relates co-occurrence frequencies to embedding geometry ( [Pennington et al., 2014](https://nlp.stanford.edu/pubs/glove.pdf) ).  
 
-- Each token is represented as a vector of fixed dimension (e.g., 50–300). Larger dimensionality can capture richer semantic nuances but increases computation cost.  
-- Training minimizes a weighted least-squares loss designed to enforce that dot products of word vectors approximate the logarithm of co-occurrence counts.  
-- Evaluation of learned embeddings is performed using:  
-  - **Word similarity tests**: Measuring pairwise cosine similarity between embeddings to check semantic closeness.  
-  - **Word analogy tests**: Using vector arithmetic (e.g., “king – man + woman ≈ queen”) to assess how well embeddings capture linear semantic regularities ([Mikolov et al., 2013](https://arxiv.org/abs/1301.3781)).  
+
+
+#### Train the Word Vectors
+
+- Each token is represented as a vector of fixed dimension (e.g., 50–300).
+Larger dimensionality can capture richer semantic nuances but increases computation cost.
+
+- Training minimizes a weighted least-squares loss designed to enforce that dot products of word vectors approximate the logarithm of co-occurrence counts.
+
+- Evaluation of learned embeddings is performed using:
+
+  - **Word similarity tests**<br>
+  Measuring pairwise cosine similarity between embeddings to check semantic closeness.
+
+  - **Word analogy tests**<br>
+  Using vector arithmetic ( e.g., “king” - “ma” + “woman” ≈ “queen” ) to assess how well embeddings capture linear semantic regularities ( [Mikolov et al., 2013](https://arxiv.org/abs/1301.3781) ).  
+
 
 ---
 
+
 ### Train the Neural Networks
 
-Once embeddings are available, they serve as inputs to classification models tasked with distinguishing sarcastic from non-sarcastic comments. Three architectures are explored: **Feedforward Neural Networks (FNNs)**, **Convolutional Neural Networks (CNNs)**, and **Recurrent Neural Networks (RNNs)**.  
 
-### Feedforward Neural Network (FNN)
+Once embeddings are available, they serve as inputs to classification models tasked with distinguishing sarcastic from non-sarcastic comments.
+Three architectures are explored: **Feedforward Neural Networks (FNNs)**, **Convolutional Neural Networks (CNNs)**, and **Recurrent Neural Networks (RNNs)**.
 
-1. **Input representation**: Since comments are variable length, each must be transformed into a fixed-size vector. Strategies include:  
-   - **Averaging word vectors (Fréchet mean)**: Compute the component-wise mean of all word embeddings in a comment. This provides a simple “bag of embeddings” representation.  
-   - **TF-IDF weighted averaging**: Scale embeddings by their term frequency–inverse document frequency scores so that rare but informative words have more influence ([Wikipedia: TF–IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)).  
 
-2. **Network architecture**:  
-   - Input layer corresponding to the embedding dimension.  
-   - One or more hidden layers with nonlinear activation (ReLU or tanh).  
-   - Output layer with a sigmoid activation to predict probability of sarcasm.  
+#### <ins>Feedforward Neural Network (FNN)</ins>
 
-3. **Loss function**: Binary Cross-Entropy (BCE), defined as:  
-   \[
-   BCE(p,y) = -(y \cdot \log(p) + (1-y) \cdot \log(1-p))
-   \]  
 
-4. **Regularization techniques**:  
+1. **Input representation**<br>
+Since comments are variable length, each must be transformed into a fixed-size vector.
+Strategies include:
+
+   - **Averaging word vectors ( Fréchet mean )**<br>
+   Compute the component-wise mean of all word embeddings in a comment.
+   This provides a simple “bag of embeddings” representation.
+
+   - **TF-IDF weighted averaging**<br>
+   Scale embeddings by their term frequency–inverse document frequency scores so that rare but informative words have more influence ( [Wikipedia: TF–IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) ).
+
+2. **Network architecture**
+   - Input layer corresponding to the embedding dimension.
+   - One or more hidden layers with nonlinear activation (ReLU or tanh).
+   - Output layer with a sigmoid activation to predict probability of sarcasm.
+
+3. **Loss function**<br>
+Binary Cross-Entropy (BCE), defined as:
+
+$$\textrm{BCE}(p,y) = -(y \cdot \log(p) + (1-y) \cdot \log(1-p))$$
+
+4. **Regularization techniques**
    - **Batch Normalization** to stabilize training.  
-   - **Dropout** and **weight decay** to prevent overfitting ([Srivastava et al., 2014](https://jmlr.org/papers/v15/srivastava14a.html)).  
+   - **Dropout** and **weight decay** to prevent overfitting ( [Srivastava et al., 2014](https://jmlr.org/papers/v15/srivastava14a.html) ).
 
-5. **Troubleshooting and diagnostics**:  
-   - **Precision/recall metrics** highlight imbalances between sarcastic and non-sarcastic predictions.  
-   - **Confidence histograms** reveal uncertainty when probabilities cluster near 0.5.  
-   - **PCA analysis** of learned feature space can show whether embeddings form separable clusters by class.  
+5. **Troubleshooting and diagnostics**:
+   - **Precision/recall metrics** highlight imbalances between sarcastic and non-sarcastic predictions.
+   - **Confidence histograms** reveal uncertainty when probabilities cluster near 0.5.
+   - **PCA analysis** of learned feature space can show whether embeddings form separable clusters by class.
 
-### Convolutional Neural Network (CNN)
+#### <ins>Convolutional Neural Network (CNN)</ins>
 
-- CNNs apply convolutional filters over sequences of embeddings to extract local n-gram features. For sarcasm, this can capture short sarcastic cues like “yeah right” or “as if.”  
-- CNNs have proven effective in sentence classification tasks ([Kim, 2014](https://arxiv.org/abs/1408.5882)).  
+- CNNs apply convolutional filters over sequences of embeddings to extract local n-gram features. For sarcasm, this can capture short sarcastic cues like “yeah right” or “as if.”
 
-### Recurrent Neural Network (RNN)
-
-- RNNs (and their variants such as LSTMs and GRUs) process sequences word by word, maintaining memory of prior context. This is particularly useful in sarcasm, where long-range dependencies (setup–punchline structures) exist.  
-- RNNs remain a standard choice for modeling sequential dependencies ([Wikipedia: Recurrent neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network)).  
+- CNNs have proven effective in sentence classification tasks ( [Kim, 2014](https://arxiv.org/abs/1408.5882) ).
 
 
+#### <ins>Recurrent Neural Network (RNN)</ins>
+
+- RNNs (and their variants such as LSTMs and GRUs) process sequences word by word, maintaining memory of prior context. This is particularly useful in sarcasm, where long-range dependencies (setup–punchline structures) exist.
+
+- RNNs remain a standard choice for modeling sequential dependencies ( [Wikipedia: Recurrent neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network) ).
 
 
 <!-- ##### <ins>Collect comments classified as sarcastic/not sarcastic</ins> -->
@@ -415,123 +489,167 @@ Once embeddings are available, they serve as inputs to classification models tas
 
 1. ... text here ... -->
 
-## __References and Helpful Resources__
-
-### __Data__
-1. [Sarcasm on Reddit <br> – Kaggle dataset with Reddit posts classified as either sarcastic or not sarcastic ( _Kaggle_ website ).](https://www.kaggle.com/datasets/danofer/sarcasm/data?select=train-balanced-sarcasm.csv)
-
-### __Theoretical Foundations__
-
-##### <ins>Natural Language Processing</ins>
-1. [Natural language processing <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Natural_language_processing)
-
-1. [Text Classification & Sentiment Analysis <br> – Introduction to natural language processing techniques ( _ML Archive_ website ).](https://mlarchive.com/natural-language-processing/text-classification-sentiment-analysis/)
-
-1. [Text Embeddings: Comprehensive Guide <br> – Introductory guide to text embeddings for natural language processing ( _Towards Data Science_ website ).](https://towardsdatascience.com/text-embeddings-comprehensive-guide-afd97fce8fb5/)
-
-1. [Word Embeddings – Explained! <br> – Introductory guide to word embeddings for natural language processing ( _Towards Data Science_ website ).](https://towardsdatascience.com/word-embeddings-explained-c07c5ea44d64/)
-
-##### <ins>word2vec Model</ins>
-1. [Word2Vec: NLP with Contextual Understanding. <br> – Theoretical guide for word2vec and GloVe models ( _ML Archive_ website ).](https://mlarchive.com/natural-language-processing/word2vec-nlp-with-contextual-understanding/)
-
-1. [Word2vec model <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Word2vec)
-
-1. [CBOW — Word2Vec <br> – Introduction to the continous bag of words (CBOW) and word2vec models ( _Medium_ website ).](https://medium.com/@anmoltalwar/cbow-word2vec-854a043ee8f3)
 
 
-1. [*Efficient Estimation of Word Representations in Vector Space* <br> – Original academic paper ( arxiv.org ).](https://arxiv.org/abs/1301.3781v3)
+## References and Helpful Resources
 
-##### <ins>GloVe Model</ins>
-1. [GloVe model <br> – Wikipedia article.](https://en.wikipedia.org/wiki/GloVe)
 
-1. [*GloVe: Global Vectors for Word Representation* <br> – Original manusript/academic paper ( Standford NLP Group ).](https://nlp.stanford.edu/pubs/glove.pdf)
+### Data
 
-##### <ins>Sentiment Analysis</ins>
-1. [Detection of emotion by text analysis using machine learning <br> – Article published in _Frontiers of Psychology_.](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1190326/full)
+1. [_Sarcasm on Reddit_ — Kaggle dataset with Reddit posts classified as either sarcastic or not sarcastic ( _Kaggle_ website ).](https://www.kaggle.com/datasets/danofer/sarcasm/data?select=train-balanced-sarcasm.csv)
 
-### __Sample Works__
-1. [Sarcasm Detection with GloVe/Word2Vec <br> – Project on Kaggle applying the word2vec and GloVe models to classifying news headlines from _The Onion_ and the _The Huffington Post_.](https://www.kaggle.com/code/madz2000/sarcasm-detection-with-glove-word2vec-83-accuracy)
 
-### __Documentation and Tutorials__
+---
+
+
+### Theoretical Foundations
+
+
+#### <ins>Natural Language Processing</ins>
+
+1. [_Natural language processing_ — Wikipedia article.](https://en.wikipedia.org/wiki/Natural_language_processing)
+
+1. [_Text Classification & Sentiment Analysis_ — Introduction to natural language processing techniques ( _ML Archive_ website ).](https://mlarchive.com/natural-language-processing/text-classification-sentiment-analysis/)
+
+1. [_Text Embeddings: Comprehensive Guide_ — Introductory guide to text embeddings for natural language processing ( _Towards Data Science_ website ).](https://towardsdatascience.com/text-embeddings-comprehensive-guide-afd97fce8fb5/)
+
+1. [_Word Embeddings—Explained!_ — Introductory guide to word embeddings for natural language processing ( _Towards Data Science_ website ).](https://towardsdatascience.com/word-embeddings-explained-c07c5ea44d64/)
+
+1. [_Embeddings from Language Model ( ELMo )_ — Wikipedia article.](https://en.wikipedia.org/wiki/ELMo)
+
+1. [_Bidirectional encoder representations from transformers ( BERT )_ — Wikipedia article. ](https://en.wikipedia.org/wiki/BERT_(language_model))
+
+
+
+#### <ins>word2vec Model</ins>
+
+1. [_Word2Vec: NLP with Contextual Understanding._ — Theoretical guide for word2vec and GloVe models ( _ML Archive_ website ).](https://mlarchive.com/natural-language-processing/word2vec-nlp-with-contextual-understanding/)
+
+1. [_Word2vec model_ — Wikipedia article.](https://en.wikipedia.org/wiki/Word2vec)
+
+1. [_CBOW – Word2Vec_ — Introduction to the continous bag of words (CBOW) and word2vec models ( _Medium_ website ).](https://medium.com/@anmoltalwar/cbow-word2vec-854a043ee8f3)
+
+1. [_Efficient Estimation of Word Representations in Vector Space_ — Original academic paper ( arxiv.org ).](https://arxiv.org/abs/1301.3781v3)
+
+
+
+#### <ins>GloVe Model</ins>
+
+1. [_GloVe model_ — Wikipedia article.](https://en.wikipedia.org/wiki/GloVe)
+
+1. [_GloVe: Global Vectors for Word Representation_ — Original manusript/academic paper ( Standford NLP Group ).](https://nlp.stanford.edu/pubs/glove.pdf)
+
+
+
+#### <ins>Sentiment Analysis</ins>
+
+1. [_Detection of emotion by text analysis using machine learning_ — Article published in _Frontiers of Psychology_.](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1190326/full)
+
+
+---
+
+
+### Sample Works
+
+1. [_Sarcasm Detection with GloVe/Word2Vec_ — Project on Kaggle applying the word2vec and GloVe models to classifying news headlines from _The Onion_ and the _The Huffington Post_.](https://www.kaggle.com/code/madz2000/sarcasm-detection-with-glove-word2vec-83-accuracy)
+
+
+---
+
+
+### Documentation and Tutorials
+
 
 #### <ins>Neural Networks</ins>
-1. [Your First Deep Learning Project in Python with Keras Step-by-Step <br> – Guide to building and training a neural network in Python with Keras ( _Machine Learning Mastery_ website ).](https://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)
 
-1. [Training a Neural Network using Keras API in Tensorflow <br> – Guide to using Keras for neural network training ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/training-a-neural-network-using-keras-api-in-tensorflow/)
+1. [_Your First Deep Learning Project in Python with Keras Step-by-Step_ — Guide to building and training a neural network in Python with Keras ( _Machine Learning Mastery_ website ).](https://machinelearningmastery.com/tutorial-first-neural-network-python-keras/)
 
-1. [Python AI: How to Build a Neural Network & Make Predictions <br> – Tutorial on building your own neural network in Python from scratch ( _Real Python_ website ).](https://realpython.com/python-ai-neural-network/) 
+1. [_Training a Neural Network using Keras API in Tensorflow_ — Guide to using Keras for neural network training ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/training-a-neural-network-using-keras-api-in-tensorflow/)
+
+1. [_Python AI: How to Build a Neural Network & Make Predictions_ — Tutorial on building your own neural network in Python from scratch ( _Real Python_ website ).](https://realpython.com/python-ai-neural-network/) 
+
+
 
 #### <ins>Gensim</ins>
-1. [Gensim Word2Vec Tutorial <br> – Notebook posted on Kaggle by one of the developers of Gensim ( _Kaggle_ website ).](https://www.kaggle.com/code/pierremegret/gensim-word2vec-tutorial)
 
-1. [Word2vec embeddings <br> – Word2vec module documation ( _Gensim_ website ).](https://radimrehurek.com/gensim/models/word2vec.html)
+1. [_Gensim Word2Vec Tutorial_ — Notebook posted on Kaggle by one of the developers of Gensim ( _Kaggle_ website ).](https://www.kaggle.com/code/pierremegret/gensim-word2vec-tutorial)
 
-1. [Word2Vec Model <br> – Word2vec tutorial ( _Gensim_ website ).](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html)
+1. [_Word2vec embeddings_ — Word2vec module documation ( _Gensim_ website ).](https://radimrehurek.com/gensim/models/word2vec.html)
 
-### __Other Theoretical Backgrounds__
-1. [Machine Learning Tutorial <br> – General overview/tutorial on machine learning ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/machine-learning/)
-
-1. [AI ML DS - How To Get Started? <br> – General overview on artificial intelligence, machine learning, and data science ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/ai-ml-ds/)
-
-1. [Bag of words model <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Bag-of-words_model)
-
-1. [Logistic regression <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Logistic_regression)
-
-1. [Multinomial logistic regression <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Multinomial_logistic_regression)
-
-1. [Least squares <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Least_squares)
-
-1. [Tf-idf ( term frequency-inverse document frequency ) <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
-
-1. [Feedforward neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Feedforward_neural_network)
-
-1. [Convolutional neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Convolutional_neural_network)
-
-1. [Recurrent neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Recurrent_neural_network)
-
-1. [Tf-idf ( term frequency-inverse document frequency ) <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
-
-1. [Feedforward neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Feedforward_neural_network)
-
-1. [Convolutional neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Convolutional_neural_network)
-
-1. [Recurrent neural network <br> - Wikipedia article.](https://en.wikipedia.org/wiki/Recurrent_neural_network)
-
-### __Mathematical References__
-
-1. [Dot product <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Dot_product)
-
-1. [Cosine similarity <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Cosine_similarity)
-
-1. [Linear least squares <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Linear_least_squares)
-
-1. [Fréchet mean <br> – Wikipedia article.](https://en.wikipedia.org/wiki/Fr%C3%A9chet_mean)
-
-### __Graphical Visualization Guides__
-1. [The Art of Effective Visualization of Multi-dimensional Data <br> – Guide on plotting multidimensional data ( _Towards Data Science_ website ).](https://towardsdatascience.com/the-art-of-effective-visualization-of-multi-dimensional-data-6c7202990c57/)
-
-1. [Top Python Data Visualization Libraries in 2024: A Complete Guide <br> – ( _Fusion Charts_ website ).](https://www.fusioncharts.com/blog/best-python-data-visualization-libraries/)
-
-1. [A Complete Beginner’s Guide to Data Visualization <br> – ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2021/04/a-complete-beginners-guide-to-data-visualization/)
-
-1. [Tableau for Beginners: Data Visualisation Made Easy <br> – ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2017/07/data-visualisation-made-easy/)
-
-1. [Intermediate Tableau guide for data science and business intelligence professionals <br> – ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2018/01/tableau-for-intermediate-data-science/)
+1. [_Word2Vec Model_ — Word2vec tutorial ( _Gensim_ website ).](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html)
 
 
+---
 
-## __Implementation__
+
+### More Theoretical Background
+
+1. [_Machine Learning Tutorial_ — General overview/tutorial on machine learning ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/machine-learning/)
+
+1. [_AI ML DS - How To Get Started?_ — General overview on artificial intelligence, machine learning, and data science ( _GeeksforGeeks_ website ).](https://www.geeksforgeeks.org/ai-ml-ds/)
+
+1. [_Bag of words model_ — Wikipedia article.](https://en.wikipedia.org/wiki/Bag-of-words_model)
+
+1. [_Logistic regression_ — Wikipedia article.](https://en.wikipedia.org/wiki/Logistic_regression)
+
+1. [_Multinomial logistic regression_ — Wikipedia article.](https://en.wikipedia.org/wiki/Multinomial_logistic_regression)
+
+1. [_Least squares_ — Wikipedia article.](https://en.wikipedia.org/wiki/Least_squares)
+
+1. [_Tf-idf ( term frequency-inverse document frequency )_ — Wikipedia article.](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+
+1. [_Feedforward neural network_ - Wikipedia article.](https://en.wikipedia.org/wiki/Feedforward_neural_network)
+
+1. [_Convolutional neural network_ - Wikipedia article.](https://en.wikipedia.org/wiki/Convolutional_neural_network)
+
+1. [_Recurrent neural network_ - Wikipedia article.](https://en.wikipedia.org/wiki/Recurrent_neural_network)
 
 
-## __Future Direction and Possible Improvements__
+---
+
+
+### Mathematical References
+
+1. [_Dot product_ — Wikipedia article.](https://en.wikipedia.org/wiki/Dot_product)
+
+1. [_Cosine similarity_ — Wikipedia article.](https://en.wikipedia.org/wiki/Cosine_similarity)
+
+1. [_Linear least squares_ — Wikipedia article.](https://en.wikipedia.org/wiki/Linear_least_squares)
+
+1. [_Fréchet mean_ — Wikipedia article.](https://en.wikipedia.org/wiki/Fr%C3%A9chet_mean)
+
+
+---
+
+
+### Graphical Visualization Guides
+1. [_The Art of Effective Visualization of Multi-dimensional Data_ — Guide on plotting multidimensional data ( _Towards Data Science_ website ).](https://towardsdatascience.com/the-art-of-effective-visualization-of-multi-dimensional-data-6c7202990c57/)
+
+1. [_Top Python Data Visualization Libraries in 2024: A Complete Guide_ — ( _Fusion Charts_ website ).](https://www.fusioncharts.com/blog/best-python-data-visualization-libraries/)
+
+1. [_A Complete Beginner’s Guide to Data Visualization_ — ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2021/04/a-complete-beginners-guide-to-data-visualization/)
+
+1. [_Tableau for Beginners: Data Visualisation Made Easy_ — ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2017/07/data-visualisation-made-easy/)
+
+1. [_Intermediate Tableau guide for data science and business intelligence professionals_ — ( _Analytics Vidhya_ website ).](https://www.analyticsvidhya.com/blog/2018/01/tableau-for-intermediate-data-science/)
+
+
+
+## Future Direction and Possible Improvements
 1. Machine learning
     1. Extend project to sentiment and tone classificaiton of text.
+
     1. Extend project to multimodal classification where multiple input modalities (images, video, audio, etc.) are used together for prediction/classification.
 
-1. (–stretch goal–) Browser application
+1. Browser application
     1. Develop an app that can be used in a web browser that allows the user to directly take a comment and its associated data straight from the Reddit website (or from a screenshot).
+
     1. Develop the app further to display in real time the predicted tone of all of the comments seen in the current browser window.
+
     1. Extend project to multimodal classification where multiple input modalities (images, video, audio, etc.) are used together for prediction/classification.
 
 
-    </div>
+
+
+
+</div>
