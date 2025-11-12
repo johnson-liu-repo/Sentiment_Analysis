@@ -13,7 +13,7 @@ Sarcasm presents a distinctive challenge for natural language processing (NLP), 
 The approach combines word vector representations (trained locally or using pre-trained embeddings from libraries like Hugging Face's Transformers) with neural betwork architectures (feedforward, convolutional, and recurrent models) to classify comments as sarcastic or non-sarcastic.
 
 Johnson Liu\
-GitHub: [@johnson-liu-code](https://github.com/johnson-liu-code)
+GitHub: [@johnson-liu-repo](https://github.com/johnson-liu-repo)
 
 
 
@@ -27,7 +27,8 @@ GitHub: [@johnson-liu-code](https://github.com/johnson-liu-code)
 &nbsp;&nbsp;&nbsp;2.1.2 [Word2Vec](#word2vec)\
 &nbsp;&nbsp;&nbsp;2.1.3 [GloVe](#glove)\
     2.2. [Data Used](#data-used)\
-    2.3. [Mathematical Foundations](#mathematical-foundations)
+    2.3. [Some Math](#some-math)\
+&nbsp;&nbsp;&nbsp;2.3.1 [Miscellaneous](#miscellaneous)
 
 3. [Workflow](#workflow)\
     3.1. [Data Preprocessing]()\
@@ -140,8 +141,8 @@ This will allow our classifier to learn the difference between sincere and sarca
 The data that was used in this project was taken from the *Sarcasm on Reddit* notebook from Kaggle.com ( see [2.1 Data](#data) ).
 
 
+<!--
 ---
-
 
 ## Variable Definitions
 
@@ -185,21 +186,40 @@ This probability is defined as
 
 $$P_{ij} \ \ = \ \ P(\text{word}_j|\text{word}_i) \ \ \\ $$
 
-$$P_{ij} \ \ = \ \ \frac{X_{ij}}{X_i} \ \ . $$
+$$P_{ij} \ \ = \ \ \frac{X_{ij}}{X_i} \ \ . $$ -->
 
 
 ---
 
 
-## Mathematical Foundations
+## Some Math
+
+### Natural Language Processing
+
+#### Notation
+
+1. Token $w$:\
+    An individual unit of text that the model can understand.
+    Can be an entire word, parts of a word, single characters, punctuation marks, spaces, and other special characters.
+
+1. Target and context vectors $u_w \in \R^d$ and $v_w \in \R^d$:\
+    The two vectors associated with token $w$.
+    $d$ is the embedding dimension of the vectors.
+
+1. Vocabulary $V$:\
+    The set of all tokens recognized by the model.\
+    The size of the vocabulary is $|V| = W$.
+
+1. Corpus $C$:\
+    A sequence of tokens from the vocabulary.
+
+1. Context window $\mathcal{C}_t$:\
+    A section of the corpus centered around a token at position $t$.
+    The section includes tokens $\pm k$ positions away from the central token $w_t$.
+
+#### Word2Vec
 
 
-#### Fréchet Mean
-Given a set of vectors, the Fréchet mean is a single point that averages over all of the vectors.
-The mean acts as a point of central tendency for the word vectors associated with a specific comment.
-
-
----
 
 
 ### Neural Networks
@@ -209,6 +229,21 @@ The mean acts as a point of central tendency for the word vectors associated wit
 
 
 #### Backpropagation
+
+
+
+### Miscellaneous
+(come up with a better section title)
+
+#### Fréchet Mean
+Given a set of vectors, the Fréchet mean is a single point that averages over all of the vectors.
+The mean acts as a point of central tendency for the word vectors associated with a specific comment.
+
+
+---
+
+
+
 
 
 
