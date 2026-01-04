@@ -3,9 +3,11 @@
 if __name__ == "__main__":
     ############################################################
     import os
+    import sys
     import argparse
     ############################################################
     import numpy as np
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
     # For consistency in testing.
     import random
     random.seed(1994)
@@ -37,7 +39,7 @@ if __name__ == "__main__":
     if part == 'preprocess':
         from scipy.sparse import save_npz
         
-        import functions.helper_functions.data_preprocessing
+        from sentiment_analysis.functions.helper_functions import data_preprocessing
         ########################################################
 
         data_file_name='data/project_data/raw_data/trimmed_training_data.csv'
@@ -55,7 +57,7 @@ if __name__ == "__main__":
         print(f"We are keeping only words that occur at least {min_word_count} times in the comments...")
 
         unique_words, cooc_matrix_sparse, filtered_comments, filtered_labels = (
-            functions.helper_functions.data_preprocessing.data_preprocessing(
+            data_preprocessing.data_preprocessing(
                 data_file_name,
                 comments_limit,
                 window_size,
@@ -84,7 +86,7 @@ if __name__ == "__main__":
     elif part == 'train_vectors':
         from scipy.sparse import load_npz
 
-        import functions.machine_learning.LogBilinearModel
+        from sentiment_analysis.functions.machine_learning import LogBilinearModel
         ########################################################
 
 
@@ -102,7 +104,7 @@ if __name__ == "__main__":
 
         # Train the word vectors using PyTorch.
         print("Training word vectors through log bilinear regression...")
-        word_vectors_over_time = functions.machine_learning.LogBilinearModel.train_sparse_glove(
+        word_vectors_over_time = LogBilinearModel.train_sparse_glove(
             cooc_sparse=cooc_matrix_sparse,
             embedding_dim=200,
             epochs=100,
@@ -122,7 +124,7 @@ if __name__ == "__main__":
     elif part == 'vectorize_comments':
         import torch
         from sklearn.feature_extraction.text import TfidfVectorizer
-        import functions.comment_representation.tf_idf_vectorization
+        from sentiment_analysis.functions.comment_representation import tf_idf_vectorization
 
 
 
@@ -162,14 +164,14 @@ if __name__ == "__main__":
 
         print("Creating the vectorized comments...")
         output_file_name = 'testing_scrap_misc/training_01/vectorized_comments.npy'
-        functions.comment_representation.tf_idf_vectorization.vectorize_comments_with_tfidf(
+        tf_idf_vectorization.vectorize_comments_with_tfidf(
             text, vectorizer, word_vectors_matrix, output_file_name )
 # ----> should have the function return the data and save the data here in main?
     ############################################################
 
     ############################################################
     elif part == 'train_fnn':
-        import functions.machine_learning.feedforward_neural_network
+        from sentiment_analysis.models import feedforward_neural_network
 
 
 
@@ -186,7 +188,7 @@ if __name__ == "__main__":
         print(f"Number of training datapoints...{len(labels)}")
 
         print("Training the feedforward neural network...")
-        functions.machine_learning.feedforward_neural_network.custom_fnn(
+        feedforward_neural_network.custom_fnn(
                 vectorized_comments,
                 labels,
                 epochs = 100,
@@ -312,6 +314,8 @@ if __name__ == "__main__":
     ############################################################
 
     ############################################################
+        from sentiment_analysis.models import feedforward_neural_network
+
         labels = np.load('testing_scrap_misc/training_01/preprocessing/labels.npy')
 
         num_zeros = np.sum(labels == 0)
@@ -322,7 +326,7 @@ if __name__ == "__main__":
         print(f"Number of training datapoints...{len(labels)}")
 
         print("Training the feedforward neural network...")
-        functions.machine_learning.feedforward_neural_network.custom_fnn(
+        feedforward_neural_network.custom_fnn(
                 vectorized_comments,
                 labels,
                 epochs = 100,
@@ -511,4 +515,3 @@ if __name__ == "__main__":
 #       Captures word order
 #       Maintains directional context
 #       Final hidden state or an attention-weighted sum can represent the whole comment
-

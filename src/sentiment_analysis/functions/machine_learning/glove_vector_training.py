@@ -59,11 +59,11 @@ def GloVe_train_word_vectors(
     import pandas as pd
     import numpy as np
     ###########################################################################
-    import functions.helper_functions.cooccurrence_matrix
-    import functions.helper_functions.cooccurrence_probability
-    import functions.helper_functions.word_vectors
-    import functions.machine_learning.gradient_descent
-    import functions.machine_learning.LogBilinearModel
+    from sentiment_analysis.functions.helper_functions import cooccurrence_matrix
+    from sentiment_analysis.functions.helper_functions import cooccurrence_probability
+    from sentiment_analysis.functions.helper_functions import word_vectors
+    from sentiment_analysis.functions.machine_learning import gradient_descent
+    from sentiment_analysis.functions.machine_learning import LogBilinearModel
     ###########################################################################
 
     # Read the data into a DataFrame.
@@ -80,7 +80,7 @@ def GloVe_train_word_vectors(
     # This returns a 2D array for the co-occurrence matrix.
 
     unique_words, cooccurrence_matrix = (
-        functions.helper_functions.cooccurrence_matrix.create_cooccurrence_matrix(
+        cooccurrence_matrix.create_cooccurrence_matrix(
             text,
             window_size
         )
@@ -101,7 +101,7 @@ def GloVe_train_word_vectors(
 
     # Convert co-occurrence frequencies into probabilities.
     totals, probabilities = (
-        functions.helper_functions.cooccurrence_probability.cooccurrence_probability(
+        cooccurrence_probability.cooccurrence_probability(
             cooccurrence_matrix_dict
         )
     )
@@ -136,13 +136,13 @@ def GloVe_train_word_vectors(
         
     # Initialize word vectors for each unique word.
     word_vectors = (
-        functions.helper_functions.word_vectors.create_word_vectors( 
+        word_vectors.create_word_vectors( 
             unique_words,
             word_vector_length
         )
     )
 
-    J_over_time, word_vectors_over_time = functions.machine_learning.gradient_descent.descent(
+    J_over_time, word_vectors_over_time = gradient_descent.descent(
         unique_words,
         word_vectors,
         word_vector_length,
@@ -177,4 +177,3 @@ def GloVe_train_word_vectors(
 
 # Notes
 # 1. Maybe it's better to keep the matrices as 2D arrays instead of converting between DataFrames and dictionaries.
-

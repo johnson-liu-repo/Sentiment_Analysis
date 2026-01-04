@@ -11,7 +11,7 @@ def create_sparse_cooccurrence_matrix(
     """_summary_
     This expects the sentences in the comments list to already be processed - stopwords
     and punctuation already removed from the sentences.
-    ( See functions.data_extraction.get_relevant_data )
+    ( See sentiment_analysis.functions.data_extraction.get_relevant_data )
 
     Args:
         comments (list): _description_

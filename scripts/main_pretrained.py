@@ -1,19 +1,21 @@
 if __name__ == "__main__":
     import os
+    import sys
     import argparse
     import numpy as np
     import random
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
     random.seed(1994)
 
     try:
-        from pretrained_embeddings import (
+        from sentiment_analysis.embeddings.pretrained_embeddings import (
             build_tfidf_and_vocab,
             load_pretrained_vectors,
             tfidf_weighted_average_embeddings,
             save_vectorized_comments
         )
     except Exception:
-        from .pretrained_embeddings import (
+        from sentiment_analysis.embeddings.pretrained_embeddings import (
             build_tfidf_and_vocab,
             load_pretrained_vectors,
             tfidf_weighted_average_embeddings,
@@ -91,9 +93,9 @@ if __name__ == "__main__":
 
     elif args.part == 'train_fnn':
         try:
-            from feedforward_neural_network import custom_fnn
+            from sentiment_analysis.models.feedforward_neural_network import custom_fnn
         except Exception:
-            from functions.machine_learning.feedforward_neural_network import custom_fnn
+            from sentiment_analysis.models.feedforward_neural_network import custom_fnn
 
         vecs_path = os.path.join(pretrained_dir, 'vectorized_comments.npy')
         labels_path = os.path.join(pretrained_dir, 'labels.npy')
