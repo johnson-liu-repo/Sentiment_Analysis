@@ -1,0 +1,104 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2400 >>
+stream
+BT
+/F1 12 Tf
+72 720 Td
+(Sentiment Analysis Repository Refactor Report) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Summary) Tj
+0 -14 Td
+(- Reorganized source code into a standard src/ layout under src/sentiment_analysis.) Tj
+0 -14 Td
+(- Created a top-level scripts/ directory for runnable entry points and utilities.) Tj
+0 -14 Td
+(- Updated imports across the codebase to use the new package paths.) Tj
+0 -14 Td
+(- Added __init__.py files to make packages explicit and reliable.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Detailed Changes and Rationale) Tj
+0 -14 Td
+(1\) Introduced a src/ package layout) Tj
+0 -14 Td
+(   - Moved core modules \(pretrained_embeddings.py, feedforward_neural_network.py\) into) Tj
+0 -14 Td
+(     src/sentiment_analysis/embeddings and src/sentiment_analysis/models.) Tj
+0 -14 Td
+(   - Moved the existing functions/ tree into src/sentiment_analysis/functions.) Tj
+0 -14 Td
+(   - Rationale: The src/ layout keeps import paths clean and prevents accidental) Tj
+0 -14 Td
+(     shadowing of packages when running code from the repository root.) Tj
+0 -14 Td
+(2\) Standardized entry points) Tj
+0 -14 Td
+(   - Relocated execution scripts \(main.py, main_pretrained.py, landing.py,) Tj
+0 -14 Td
+(     check_vectorized_comments.py, test.py\) into a top-level scripts/ directory.) Tj
+0 -14 Td
+(   - Rationale: Separating runnable scripts from importable modules clarifies) Tj
+0 -14 Td
+(     responsibilities and keeps the package focused on reusable code.) Tj
+0 -14 Td
+(3\) Updated imports for the new structure) Tj
+0 -14 Td
+(   - Repointed script and module imports to sentiment_analysis.*) Tj
+0 -14 Td
+(     so the refactored paths resolve consistently.) Tj
+0 -14 Td
+(   - Updated intra-package references \(e.g., glove_vector_training.py and) Tj
+0 -14 Td
+(     keras_feedforward_neural_network.py\) to use the new package paths.) Tj
+0 -14 Td
+(   - Rationale: Keeps internal references aligned with the new layout and) Tj
+0 -14 Td
+(     avoids ambiguous relative imports.) Tj
+0 -14 Td
+(4\) Package initialization) Tj
+0 -14 Td
+(   - Added missing __init__.py files throughout the moved package tree.) Tj
+0 -14 Td
+(   - Rationale: Makes package boundaries explicit, improving IDE support) Tj
+0 -14 Td
+(     and import reliability.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Notes) Tj
+0 -14 Td
+(- Data files and figures remain in their original locations; only code) Tj
+0 -14 Td
+(  organization and imports were updated.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2763
+%%EOF

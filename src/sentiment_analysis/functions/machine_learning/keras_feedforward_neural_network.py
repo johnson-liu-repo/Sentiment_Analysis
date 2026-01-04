@@ -94,7 +94,7 @@ if __name__ == "__main__":
     import numpy as np
     import pandas as pd
 
-    import code.helper_functions.frechet_mean
+    from sentiment_analysis.functions.helper_functions import frechet_mean
 
     # Get the trained word vectors from the file.
     with open('testing_scrap_misc/scrap_data_02/word_vectors_over_time.npy', 'rb') as f:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     # # Compute the Frechet mean for each comment.
     # # The Frechet mean in our context is just the mean of all of the word vectors in a comment.
-    X = code.helper_functions.frechet_mean.frechet_mean(vectors_in_comments)
+    X = frechet_mean.frechet_mean(vectors_in_comments)
 
     labels = np.random.randint(0, 2, size=(X.shape[0],))
 
